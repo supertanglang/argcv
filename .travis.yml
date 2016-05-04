@@ -1,0 +1,33 @@
+language: cpp
+
+# Ubuntu 14.04 Trusty support
+sudo: false
+
+addons:
+    apt:
+        sources:
+        # add PPAs with more up-to-date toolchains
+        - ubuntu-toolchain-r-test
+        packages:
+        # install toolchains
+        - gcc-4.9
+        - g++-4.9
+
+compiler: g++-4.9
+
+env: COMPILER=g++-4.9
+
+os:
+    - linux
+
+before_install:
+    - echo $LANG
+    - echo $LC_ALL
+
+script: 
+    - mkdir build
+    - cd build
+    - cmake .. && make -j8
+
+after_script:
+    - ctest
