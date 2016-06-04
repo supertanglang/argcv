@@ -37,10 +37,12 @@ ADD_LIBRARY(argcv_wrapper_leveldb_static STATIC ${LIBARGCV_WRAPPER_LEVELDB_SRC})
 SET_TARGET_PROPERTIES(argcv_wrapper_leveldb_static PROPERTIES OUTPUT_NAME "argcv_wrapper_leveldb")
 
 IF(OPTIONS_USE_EXTERNAL_LEVELDB)
-    ADD_DEPENDENCIES(argcv_wrapper_leveldb leveldb_proj)
-    ADD_DEPENDENCIES(argcv_wrapper_leveldb_static leveldb_proj)
+    ADD_DEPENDENCIES(argcv_wrapper_leveldb leveldb)
+    ADD_DEPENDENCIES(argcv_wrapper_leveldb_static leveldb_static)
+    ADD_DEPENDENCIES(argcv_wrapper_leveldb_static snappy_static)
     
     TARGET_LINK_LIBRARIES(argcv_wrapper_leveldb leveldb)
     TARGET_LINK_LIBRARIES(argcv_wrapper_leveldb_static leveldb_static)
+    TARGET_LINK_LIBRARIES(argcv_wrapper_leveldb_static snappy_static)
 ENDIF(OPTIONS_USE_EXTERNAL_LEVELDB)
 

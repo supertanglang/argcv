@@ -62,7 +62,16 @@ ADD_DEPENDENCIES(leveldb leveldb_proj)
 
 ADD_DEPENDENCIES(leveldb_static leveldb_proj)
 
+
 SET(LEVELDB_LIBRARY ${leveldb})
 SET(LEVELDB_LIBRARY_STATIC ${leveldb_static})
+
+INCLUDE(ExternalSnappy)
+
+ADD_DEPENDENCIES(leveldb snappy)
+ADD_DEPENDENCIES(leveldb_static snappy_static)
+
+#TARGET_LINK_LIBRARIES(leveldb snappy)
+#TARGET_LINK_LIBRARIES(leveldb_static snappy_static)
 
 
