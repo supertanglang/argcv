@@ -62,7 +62,7 @@ ADD_DEPENDENCIES(snappy snappy_proj)
 
 ADD_DEPENDENCIES(snappy_static snappy_proj)
 
-SET(SNAPPY_LIBRARY ${snappy})
-SET(SNAPPY_LIBRARY_STATIC ${snappy_static})
+SET(SNAPPY_LIBRARY snappy)
+SET(SNAPPY_LIBRARY_STATIC snappy_static)
 
 

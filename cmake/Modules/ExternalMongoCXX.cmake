@@ -82,8 +82,8 @@ MESSAGE(STATUS "ARGCV MONGO_CXX STATIC " ${MONGO_CXX_LIB_DIR}/${CMAKE_STATIC_LIB
 ADD_DEPENDENCIES(mongo_cxx_static mongo_cxx_proj)
 
 
-SET(MONGO_CXX_LIBRARY ${mongo_cxx})
-SET(MONGO_CXX_LIBRARY_STATIC ${mongo_cxx_static})
+SET(MONGO_CXX_LIBRARY mongo_cxx)
+SET(MONGO_CXX_LIBRARY_STATIC mongo_cxx_static)
 
 
 # http://www.cmake.org/cmake/help/v3.0/command/find_library.html
