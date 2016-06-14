@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -34,33 +35,39 @@ namespace ir {
 namespace index {
 namespace analyzer {
 class basic_analyzer : public analyzer {
-public:
-    basic_analyzer(tokenlizer* _t) : analyzer(_t) {
-        _t->reset();
-        std::string s;
-        while (_t->next(s)) {
-            if (s.length() > 0 && !is_western_punct(s[0])) {
-                // printf("%s %d add: %s\n", __FILE__, __LINE__, s.c_str());
-                data.push_back(s);
-            } else {
-                // printf("%s %d ignore: %s\n", __FILE__, __LINE__, s.c_str());
-            }
-        }
-        offset = 0;
-        size = data.size();
+ public:
+  basic_analyzer(tokenlizer* _t) : analyzer(_t) {
+    _t->reset();
+    std::string s;
+    while (_t->next(s)) {
+      if (s.length() > 0 && !is_western_punct(s[0])) {
+        // printf("%s %d add: %s\n", __FILE__, __LINE__, s.c_str());
+        data.push_back(s);
+      } else {
+        // printf("%s %d ignore: %s\n", __FILE__, __LINE__, s.c_str());
+      }
     }
+    offset = 0;
+    size = data.size();
+  }
 
-    bool prev(std::string& t) { return begin() ? false : (t.assign(data[offset - 1]), true); }
-    bool next(std::string& t) { return end() ? false : (t.assign(data[offset]), offset++, true); }
-    bool curr(std::string& t) { return end() ? false : (t.assign(data[offset]), true); }
-    bool reset() { return (offset = 0, true); }
-    bool end() { return offset >= size; }
-    bool begin() { return offset == 0; }
+  bool prev(std::string& t) {
+    return begin() ? false : (t.assign(data[offset - 1]), true);
+  }
+  bool next(std::string& t) {
+    return end() ? false : (t.assign(data[offset]), offset++, true);
+  }
+  bool curr(std::string& t) {
+    return end() ? false : (t.assign(data[offset]), true);
+  }
+  bool reset() { return (offset = 0, true); }
+  bool end() { return offset >= size; }
+  bool begin() { return offset == 0; }
 
-protected:
-    std::vector<std::string> data;
-    size_t offset;
-    size_t size;
+ protected:
+  std::vector<std::string> data;
+  size_t offset;
+  size_t size;
 };
 }
 }

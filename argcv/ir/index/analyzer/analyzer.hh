@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -36,19 +37,19 @@ namespace ir {
 namespace index {
 namespace analyzer {
 class analyzer : public token_seeker {
-public:
-    analyzer(tokenlizer* _t) : token_seeker(), _t(_t) {}
+ public:
+  analyzer(tokenlizer* _t) : token_seeker(), _t(_t) {}
 
-    std::vector<std::string> to_vec() {
-        std::vector<std::string> _v;
-        std::string s;
-        reset();
-        while (next(s)) _v.push_back(s);
-        return _v;
-    }
+  std::vector<std::string> to_vec() {
+    std::vector<std::string> _v;
+    std::string s;
+    reset();
+    while (next(s)) _v.push_back(s);
+    return _v;
+  }
 
-protected:
-    tokenlizer* _t;
+ protected:
+  tokenlizer* _t;
 };
 }
 }

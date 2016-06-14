@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -41,13 +42,19 @@ bool ldb_wr::destroy(const std::string& ddir) { return true; }
 
 ldb_wr::~ldb_wr() {}
 
-bool ldb_wr::start_with(const std::string& base, kv_handler kvs, void* data) { return false; }
+bool ldb_wr::start_with(const std::string& base, kv_handler kvs, void* data) {
+  return false;
+}
 bool ldb_wr::exist(const std::string& key) { return false; }
-bool ldb_wr::put(const std::string& key, const std::string& val) { return false; }
+bool ldb_wr::put(const std::string& key, const std::string& val) {
+  return false;
+}
 bool ldb_wr::get(const std::string& key, std::string* _val) { return false; }
 bool ldb_wr::rm(const std::string& key) { return false; }
 
-bool ldb_wr::batch_put(const std::map<std::string, std::string>& kvs) { return false; }
+bool ldb_wr::batch_put(const std::map<std::string, std::string>& kvs) {
+  return false;
+}
 bool ldb_wr::batch_rm(const std::set<std::string>& keys) { return false; }
 }
 }

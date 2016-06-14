@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -44,55 +45,60 @@ using ::argcv::string::as_str;
 using ::argcv::string::split;
 
 class lexicon {
-public:
-    lexicon(const std::string& dpath, size_t cache_size = 0) : db(ldb_wr(dpath, cache_size)) { db.conn(); }
-    ~lexicon() { db.close(); }
+ public:
+  lexicon(const std::string& dpath, size_t cache_size = 0)
+      : db(ldb_wr(dpath, cache_size)) {
+    db.conn();
+  }
+  ~lexicon() { db.close(); }
 
-    void set(const std::string& term, size_t sz = 0) { db.put(term, as_str<size_t>(sz)); }
-    void unset(const std::string& term) { db.rm(term); }
-    size_t count(const std::string& term) {
-        std::string rt;
-        db.get(term, &rt);
-        return as_type<size_t>(rt);
+  void set(const std::string& term, size_t sz = 0) {
+    db.put(term, as_str<size_t>(sz));
+  }
+  void unset(const std::string& term) { db.rm(term); }
+  size_t count(const std::string& term) {
+    std::string rt;
+    db.get(term, &rt);
+    return as_type<size_t>(rt);
+  }
+
+  size_t level(const std::string& term) {
+    size_t c = count(term);
+    size_t lv = 0;
+    while (c > 0) {
+      lv++;
+      c = c >> 4;
     }
+    return lv;
+  }
 
-    size_t level(const std::string& term) {
-        size_t c = count(term);
-        size_t lv = 0;
-        while (c > 0) {
-            lv++;
-            c = c >> 4;
-        }
-        return lv;
+  // load files from https://github.com/ling0322/webdict/tree/master
+  size_t load(const std::string& path) {
+    size_t sz = 0;
+    FILE* fp = fopen(path.c_str(), "r");
+    if (fp == nullptr) {  // file not found
+      return sz;
     }
-
-    // load files from https://github.com/ling0322/webdict/tree/master
-    size_t load(const std::string& path) {
-        size_t sz = 0;
-        FILE* fp = fopen(path.c_str(), "r");
-        if (fp == nullptr) {  // file not found
-            return sz;
+    char buff[1024];
+    memset(buff, 0, sizeof(char) * 1024);
+    std::vector<std::string> line;
+    while (fgets(buff, 1023, fp) != nullptr) {
+      line.clear();
+      split(buff, " ", &line);
+      if (line.size() == 2) {
+        int fq = std::stoi(line[1]);
+        if (fq > 0) {
+          sz++;
+          set(line[0], (size_t)fq);
         }
-        char buff[1024];
-        memset(buff, 0, sizeof(char) * 1024);
-        std::vector<std::string> line;
-        while (fgets(buff, 1023, fp) != nullptr) {
-            line.clear();
-            split(buff, " ", &line);
-            if (line.size() == 2) {
-                int fq = std::stoi(line[1]);
-                if (fq > 0) {
-                    sz++;
-                    set(line[0], (size_t)fq);
-                }
-            }
-        }
-        fclose(fp);
-        return sz;
+      }
     }
+    fclose(fp);
+    return sz;
+  }
 
-private:
-    ldb_wr db;
+ private:
+  ldb_wr db;
 };
 }
 }

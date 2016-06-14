@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -51,49 +52,50 @@ namespace ml {
 
 template <typename X, typename Y>
 class dataset {
-public:
-    dataset() : min_x_size(0) {}
-    std::vector<std::pair<std::vector<X>, Y>> data() { return ds; }
-    virtual ~dataset() {}
-    const uint64_t x_size() const {
-        return size() == 0 ? 0 : min_x_size;
-        /*
-        if (size() == 0)
-            return 0;
-        else
-            return ds[0].first.size();
-        */
-    }
-    const uint64_t size() const { return ds.size(); }
-    std::pair<std::vector<X>, Y> &operator[](uint64_t pos) { return ds[pos]; }
-    std::pair<std::vector<X>, Y> &at(uint64_t pos) { return ds.at(pos); }
-    std::vector<X> &x_at(uint64_t pos) { return at(pos).first; }
-    X &x_at(uint64_t pos, uint64_t off) { return x_at(pos).at(off); }
-    Y &y_at(uint64_t pos) { return at(pos).second; }
-    void add(X x[], int len, Y y) {
-        if (size() == 0 || (uint64_t)len < min_x_size) min_x_size = len;
-        std::pair<std::vector<X>, Y> val(std::vector<X>(x, x + len), y);
-        ds.push_back(val);
-    }
-    void add(std::vector<X> x, Y y) {
-        // std::pair<std::vector<X>, Y> val(x, y);
-        if (size() == 0 || (uint64_t)x.size() < min_x_size) min_x_size = x.size();
-        ds.push_back(std::make_pair(x, y));
-    }
-    void add(std::pair<std::vector<X>, Y> ds_item) {
-        if (size() == 0 || (uint64_t)ds_item.first.size() < min_x_size) min_x_size = ds_item.first.size();
-        ds.push_back(ds_item);
-    }
-    void rm(uint64_t pos) const { ds.erase(ds.begin() + pos); }
-    void rm() const { ds.clear(); }
-    void del(uint64_t pos) const { rm(pos); }
-    void del() const { rm(); }
-    void clear() const { rm(); }
+ public:
+  dataset() : min_x_size(0) {}
+  std::vector<std::pair<std::vector<X>, Y>> data() { return ds; }
+  virtual ~dataset() {}
+  const uint64_t x_size() const {
+    return size() == 0 ? 0 : min_x_size;
+    /*
+    if (size() == 0)
+        return 0;
+    else
+        return ds[0].first.size();
+    */
+  }
+  const uint64_t size() const { return ds.size(); }
+  std::pair<std::vector<X>, Y> &operator[](uint64_t pos) { return ds[pos]; }
+  std::pair<std::vector<X>, Y> &at(uint64_t pos) { return ds.at(pos); }
+  std::vector<X> &x_at(uint64_t pos) { return at(pos).first; }
+  X &x_at(uint64_t pos, uint64_t off) { return x_at(pos).at(off); }
+  Y &y_at(uint64_t pos) { return at(pos).second; }
+  void add(X x[], int len, Y y) {
+    if (size() == 0 || (uint64_t)len < min_x_size) min_x_size = len;
+    std::pair<std::vector<X>, Y> val(std::vector<X>(x, x + len), y);
+    ds.push_back(val);
+  }
+  void add(std::vector<X> x, Y y) {
+    // std::pair<std::vector<X>, Y> val(x, y);
+    if (size() == 0 || (uint64_t)x.size() < min_x_size) min_x_size = x.size();
+    ds.push_back(std::make_pair(x, y));
+  }
+  void add(std::pair<std::vector<X>, Y> ds_item) {
+    if (size() == 0 || (uint64_t)ds_item.first.size() < min_x_size)
+      min_x_size = ds_item.first.size();
+    ds.push_back(ds_item);
+  }
+  void rm(uint64_t pos) const { ds.erase(ds.begin() + pos); }
+  void rm() const { ds.clear(); }
+  void del(uint64_t pos) const { rm(pos); }
+  void del() const { rm(); }
+  void clear() const { rm(); }
 
-private:
-    std::vector<std::pair<std::vector<X>, Y>> ds;
-    std::vector<std::vector<int>> v;
-    uint64_t min_x_size;
+ private:
+  std::vector<std::pair<std::vector<X>, Y>> ds;
+  std::vector<std::vector<int>> v;
+  uint64_t min_x_size;
 };
 
 typedef dataset<double, int> dataset_d;
@@ -105,19 +107,23 @@ typedef dataset<std::string, std::string> dataset_ss;
 
 template <typename X, typename Y>
 class ml {
-public:
-    virtual void init(dataset<X, Y> d) {}
-    virtual void add(X x[], int len, Y y) { add(std::vector<X>(x, x + len), y); }
-    virtual void add(std::pair<std::vector<X>, Y> ds_item) { add(ds_item.first, ds_item.second); }
-    virtual void add(std::vector<X> x, Y y) = 0;
-    virtual bool learn() = 0;
-    virtual bool save(const std::string &path) = 0;
-    virtual bool load(const std::string &path) = 0;
-    virtual bool opt(const std::string &key, const std::string &value) { return false; }
-    virtual bool opt(const std::string &key, uint64_t value) { return false; }
-    virtual bool opt(const std::string &key, double value) { return false; }
-    virtual bool opt(const std::string &key, bool value) { return false; }
-    virtual Y predict(std::vector<X> x) = 0;
+ public:
+  virtual void init(dataset<X, Y> d) {}
+  virtual void add(X x[], int len, Y y) { add(std::vector<X>(x, x + len), y); }
+  virtual void add(std::pair<std::vector<X>, Y> ds_item) {
+    add(ds_item.first, ds_item.second);
+  }
+  virtual void add(std::vector<X> x, Y y) = 0;
+  virtual bool learn() = 0;
+  virtual bool save(const std::string &path) = 0;
+  virtual bool load(const std::string &path) = 0;
+  virtual bool opt(const std::string &key, const std::string &value) {
+    return false;
+  }
+  virtual bool opt(const std::string &key, uint64_t value) { return false; }
+  virtual bool opt(const std::string &key, double value) { return false; }
+  virtual bool opt(const std::string &key, bool value) { return false; }
+  virtual Y predict(std::vector<X> x) = 0;
 };
 }
 }  // namespace argcv::ml

@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -42,15 +43,15 @@ using ::argcv::wrapper::leveldb::ldb_wr;
 using ::argcv::storage::storage;
 
 index::index(storage* _stg) : _stg(_stg) {
-    printf("index started\n");
-    _lock_w = new std::mutex;
-    _stg->conn();
+  printf("index started\n");
+  _lock_w = new std::mutex;
+  _stg->conn();
 }
 
 index::~index() {
-    _stg->close();
-    delete _lock_w;
-    printf("index destroied\n");
+  _stg->close();
+  delete _lock_w;
+  printf("index destroied\n");
 }
 }
 }

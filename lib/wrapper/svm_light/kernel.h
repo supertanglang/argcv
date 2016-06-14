@@ -33,7 +33,6 @@
    then the SVECTOR field "words" will contain the vector 1:3 5:6, and
    "userdefined" will contain the string "abcdefg". */
 
-
 /* if svm-learn is used out of C++, define it as extern "C" */
 #ifdef __cplusplus
 extern "C" {
@@ -42,7 +41,7 @@ extern "C" {
 double custom_kernel(KERNEL_PARM *kernel_parm, SVECTOR *a, SVECTOR *b)
 /* plug in you favorite kernel */
 {
-    return ((double)(1.0));
+  return ((double)(1.0));
 }
 
 #ifdef __cplusplus

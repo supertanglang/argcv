@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -27,37 +28,29 @@
 #include <cstdio>
 #include <cstring>
 
+#include "argcv/argcv.hh"
+#include "concurrent/threads_test.hh"
+#include "ir/index/analyzer/analyzer_test.hh"
 #include "string/string_test.hh"
 #include "sys/sys_test.hh"
-#include "wrapper/leveldb_wr_test.hh"
 #include "wrapper/ini_wr_test.hh"
-#include "ir/index/analyzer/analyzer_test.hh"
-#include "concurrent/threads_test.hh"
-#include "argcv/argcv.hh"
+#include "wrapper/leveldb_wr_test.hh"
 
-static int test_case_info(int argc,char * argv[]) {
-    argcv::argcv_info info;
-    return 0;
+static int test_case_info(int argc, char* argv[]) {
+  argcv::argcv_info info;
+  return 0;
 }
 
-
 const testcase_t test_list[] = {
-    test_case_info,
-    test_case_string_split,
-    test_case_string_replace,
-    test_case_uuid,
-    test_case_stemmer,
-    test_case_analyzer_basic,
-    test_case_leveldb_wr,
-    test_case_ini_wr,
-    test_case_threads,
-    test_case_dir_trav
-};
+    test_case_info,       test_case_string_split, test_case_string_replace,
+    test_case_uuid,       test_case_stemmer,      test_case_analyzer_basic,
+    test_case_leveldb_wr, test_case_ini_wr,       test_case_threads,
+    test_case_dir_trav};
 
-int main(int argc, char * argv[]) {
-    TEST_CASE_EXPECT_GT(argc,1);
-    int testmax = sizeof(test_list) / sizeof(test_list[0]);
-    int offset = atoi(argv[1]);
-    TEST_CASE_EXPECT_LT(offset,testmax);
-    return test_list[offset](argc, argv);
+int main(int argc, char* argv[]) {
+  TEST_CASE_EXPECT_GT(argc, 1);
+  int testmax = sizeof(test_list) / sizeof(test_list[0]);
+  int offset = atoi(argv[1]);
+  TEST_CASE_EXPECT_LT(offset, testmax);
+  return test_list[offset](argc, argv);
 }

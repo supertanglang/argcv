@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -35,40 +36,40 @@ namespace string {
 // argcv::string::blz_hasher h;
 // printf("%llu\n",h.hash("hello",0));
 class blz_hasher {
-public:
-    blz_hasher() { init(); }
-    ~blz_hasher() {}
+ public:
+  blz_hasher() { init(); }
+  ~blz_hasher() {}
 
-    // k : string , offset shall not too large , 0-3 in suggestion
-    uint64_t hash(const std::string &k, uint16_t offset = 0) {
-        uint64_t seed_a = 0x7FED7FED, seed_b = 0xEEEEEEEE;
-        uint64_t ch;
-        for (uint64_t i = 0; i < k.length(); i++) {
-            ch = (uint64_t)k[i];
-            // ch = toupper(*k++);
-            seed_a = crypt[(offset << 8) + ch] ^ (seed_a + seed_b);
-            seed_b = ch + seed_a + seed_b + (seed_b << 5) + 3;
-        }
-        return seed_a;
+  // k : string , offset shall not too large , 0-3 in suggestion
+  uint64_t hash(const std::string &k, uint16_t offset = 0) {
+    uint64_t seed_a = 0x7FED7FED, seed_b = 0xEEEEEEEE;
+    uint64_t ch;
+    for (uint64_t i = 0; i < k.length(); i++) {
+      ch = (uint64_t)k[i];
+      // ch = toupper(*k++);
+      seed_a = crypt[(offset << 8) + ch] ^ (seed_a + seed_b);
+      seed_b = ch + seed_a + seed_b + (seed_b << 5) + 3;
     }
+    return seed_a;
+  }
 
-private:
-    uint64_t crypt[0x500];  // seed
+ private:
+  uint64_t crypt[0x500];  // seed
 
-    bool init() {
-        uint64_t seed = 0x00100001, idx_a = 0, idx_b = 0, i;
-        for (idx_a = 0; idx_a < 0x100; idx_a++) {
-            for (idx_b = idx_a, i = 0; i < 5; i++, idx_b += 0x100) {
-                uint64_t t1, t2;
-                seed = (seed * 125 + 3) % 0x2AAAAB;
-                t1 = (seed & 0xFFFF) << 0x10;
-                seed = (seed * 125 + 3) % 0x2AAAAB;
-                t2 = (seed & 0xFFFF);
-                crypt[idx_b] = (t1 | t2);
-            }
-        }
-        return true;
+  bool init() {
+    uint64_t seed = 0x00100001, idx_a = 0, idx_b = 0, i;
+    for (idx_a = 0; idx_a < 0x100; idx_a++) {
+      for (idx_b = idx_a, i = 0; i < 5; i++, idx_b += 0x100) {
+        uint64_t t1, t2;
+        seed = (seed * 125 + 3) % 0x2AAAAB;
+        t1 = (seed & 0xFFFF) << 0x10;
+        seed = (seed * 125 + 3) % 0x2AAAAB;
+        t2 = (seed & 0xFFFF);
+        crypt[idx_b] = (t1 | t2);
+      }
     }
+    return true;
+  }
 };
 }
 }  // argcv::string

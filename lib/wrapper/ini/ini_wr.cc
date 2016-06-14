@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -34,13 +35,15 @@ namespace argcv {
 namespace wrapper {
 namespace ini {
 
-int ini_handler(void* user, const char* section, const char* name, const char* value) {
-    (*(ini_wr*)user)[section][name] = value;
-    return 0;
+int ini_handler(void* user, const char* section, const char* name,
+                const char* value) {
+  (*(ini_wr*)user)[section][name] = value;
+  return 0;
 }
 
-ini_wr::ini_wr(const std::string& path, const std::string& nil_val) : path(path), nil_val(nil_val) {
-    ini_parse(path.c_str(), ini_handler, this);
+ini_wr::ini_wr(const std::string& path, const std::string& nil_val)
+    : path(path), nil_val(nil_val) {
+  ini_parse(path.c_str(), ini_handler, this);
 }
 }
 }

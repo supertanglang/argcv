@@ -30,8 +30,8 @@
 #ifndef _PORTER2_STEMMER_H_
 #define _PORTER2_STEMMER_H_
 
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace Porter2Stemmer {
 void stem(std::string& word);
@@ -75,8 +75,8 @@ bool endsWith(const std::string& word, const std::string& str);
 
 bool endsInDouble(const std::string& word);
 
-bool replaceIfExists(std::string& word, const std::string& suffix, const std::string& replacement,
-                     size_t start);
+bool replaceIfExists(std::string& word, const std::string& suffix,
+                     const std::string& replacement, size_t start);
 
 bool isValidLIEnding(char ch);
 

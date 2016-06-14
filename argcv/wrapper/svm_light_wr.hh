@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -50,32 +51,32 @@ using namespace ::argcv::ml;
 class svm_light_wr_data;
 
 class svm_light_wr : public ::argcv::ml::ml<double, double> {
-public:
-    svm_light_wr();
-    svm_light_wr(dataset<double, double> data);
-    virtual ~svm_light_wr();
-    
-    void add(std::vector<double> x, double y) { data.add(x, y); }
+ public:
+  svm_light_wr();
+  svm_light_wr(dataset<double, double> data);
+  virtual ~svm_light_wr();
 
-    bool learn();
+  void add(std::vector<double> x, double y) { data.add(x, y); }
 
-    bool save(const std::string &path);
+  bool learn();
 
-    bool load(const std::string &path);
+  bool save(const std::string &path);
 
-    double predict(std::vector<double> x);
+  bool load(const std::string &path);
 
-    bool opt(const std::string &key, const std::string &value);
-    bool opt(const std::string &key, uint64_t value);
-    bool opt(const std::string &key, double value);
-    bool opt(const std::string &key, bool value);
+  double predict(std::vector<double> x);
 
-    virtual void init(dataset<double, double> d);
+  bool opt(const std::string &key, const std::string &value);
+  bool opt(const std::string &key, uint64_t value);
+  bool opt(const std::string &key, double value);
+  bool opt(const std::string &key, bool value);
 
-private:
-    dataset<double, double> data;
-    void free_all();
-    svm_light_wr_data * _sl_info;
+  virtual void init(dataset<double, double> d);
+
+ private:
+  dataset<double, double> data;
+  void free_all();
+  svm_light_wr_data *_sl_info;
 };
 }
 }

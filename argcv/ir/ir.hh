@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -43,10 +44,11 @@ namespace ir {
 // ads : all document size
 // dscct : document size contains current term
 inline double tf_idf(size_t stid, size_t atsid, size_t ads, size_t dscct) {
-    // #define MATH_LG_10 2.302585
-    // tf * idf
-    if (ads == 0 || atsid == 0 || dscct == 0) return 0;
-    return (static_cast<double>(stid) / atsid) * log(static_cast<double>(ads) / (dscct)) / 2.302585;
+  // #define MATH_LG_10 2.302585
+  // tf * idf
+  if (ads == 0 || atsid == 0 || dscct == 0) return 0;
+  return (static_cast<double>(stid) / atsid) *
+         log(static_cast<double>(ads) / (dscct)) / 2.302585;
 }
 }
 }  // namespace argcv::ir

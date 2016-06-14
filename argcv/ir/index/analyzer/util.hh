@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -27,8 +28,8 @@
 
 #include <map>
 #include <string>   // std::string
-#include <vector>   // vector
 #include <utility>  // make_pair
+#include <vector>   // vector
 
 #include "analyzer.hh"
 
@@ -40,37 +41,38 @@ namespace analyzer {
  * deprecated...
  */
 
-inline std::map<std::string, std::pair<uint64_t, std::vector<uint32_t>>> token_stat(analyzer* _t) {
-    std::map<std::string, std::pair<uint64_t, std::vector<uint32_t>>> s;
-    std::string v;
-    _t->reset();
-    size_t pos = 0;
-    while (_t->next(v)) {
-        if (s.find(v) == s.end()) {
-            std::vector<uint32_t> pl;
-            pl.push_back(pos);
-            s[v] = std::make_pair(1, pl);
-        } else {
-            s[v].first++;
-            s[v].second.push_back(pos);
-        }
-        pos++;
+inline std::map<std::string, std::pair<uint64_t, std::vector<uint32_t>>>
+token_stat(analyzer* _t) {
+  std::map<std::string, std::pair<uint64_t, std::vector<uint32_t>>> s;
+  std::string v;
+  _t->reset();
+  size_t pos = 0;
+  while (_t->next(v)) {
+    if (s.find(v) == s.end()) {
+      std::vector<uint32_t> pl;
+      pl.push_back(pos);
+      s[v] = std::make_pair(1, pl);
+    } else {
+      s[v].first++;
+      s[v].second.push_back(pos);
     }
-    return s;
+    pos++;
+  }
+  return s;
 }
 
 inline std::map<std::string, uint64_t> token_stat_c(analyzer* _t) {
-    std::map<std::string, uint64_t> s;
-    std::string v;
-    _t->reset();
-    while (_t->next(v)) {
-        if (s.find(v) == s.end()) {
-            s[v] = 1;
-        } else {
-            s[v]++;
-        }
+  std::map<std::string, uint64_t> s;
+  std::string v;
+  _t->reset();
+  while (_t->next(v)) {
+    if (s.find(v) == s.end()) {
+      s[v] = 1;
+    } else {
+      s[v]++;
     }
-    return s;
+  }
+  return s;
 }
 }
 }

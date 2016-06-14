@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -30,30 +31,33 @@ extern "C" {
 #endif
 
 inline int is_western_space(char ch) {
-    switch (ch) {
-        case 0x09:
-        case 0x0A:
-        case 0x0D:
-        case 0x20:
-            return 1;
-        default:
-            return 0;
-    }
+  switch (ch) {
+    case 0x09:
+    case 0x0A:
+    case 0x0D:
+    case 0x20:
+      return 1;
+    default:
+      return 0;
+  }
 }
 
 inline int is_western_punct(char ch) {
-    // see if it is either a space, control character, or alphanumeric and negate that
-    return ch > 0
-           && !(((ch >= 0x30 /*'0'*/) && (ch <= 0x39 /*'9'*/))
-                || ((ch >= 0x41 /*'A'*/) && (ch <= 0x5A /*'Z'*/))
-                || ((ch >= 0x61 /*'a'*/) && (ch <= 0x7A /*'z'*/)) || ((ch >= 0x00) && (ch <= 0x20)));
+  // see if it is either a space, control character, or alphanumeric and negate
+  // that
+  return ch > 0 &&
+         !(((ch >= 0x30 /*'0'*/) && (ch <= 0x39 /*'9'*/)) ||
+           ((ch >= 0x41 /*'A'*/) && (ch <= 0x5A /*'Z'*/)) ||
+           ((ch >= 0x61 /*'a'*/) && (ch <= 0x7A /*'z'*/)) ||
+           ((ch >= 0x00) && (ch <= 0x20)));
 }
 
 inline int is_western_hyphen(char ch) { return ch == 0x2D; }
 
 inline int is_western_character(char ch) {
-    return (((ch >= 0x30 /*'0'*/) && (ch <= 0x39 /*'9'*/)) || ((ch >= 0x41 /*'A'*/) && (ch <= 0x5A /*'Z'*/))
-            || ((ch >= 0x61 /*'a'*/) && (ch <= 0x7A /*'z'*/)));
+  return (((ch >= 0x30 /*'0'*/) && (ch <= 0x39 /*'9'*/)) ||
+          ((ch >= 0x41 /*'A'*/) && (ch <= 0x5A /*'Z'*/)) ||
+          ((ch >= 0x61 /*'a'*/) && (ch <= 0x7A /*'z'*/)));
 }
 
 #ifdef __cplusplus

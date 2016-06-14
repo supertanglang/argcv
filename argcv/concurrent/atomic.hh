@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -36,29 +37,23 @@ using atomic = std::atomic<T>;  // typedef std::atomic<T> as atomic<T>
 
 template <typename T>
 T* atomic_fetch_add(atomic<T*>* obj, std::ptrdiff_t arg) {
-    return obj->fetch_add(arg);
+  return obj->fetch_add(arg);
 }
 
 template <typename T>
 T* atomic_fetch_sub(atomic<T*>* obj, std::ptrdiff_t arg) {
-    return obj->fetch_sub(arg);
+  return obj->fetch_sub(arg);
 }
 
 template <typename T>
 T* atomic_fetch_or(atomic<T*>* obj, std::ptrdiff_t arg) {
-    return obj->fetch_or(arg);
+  return obj->fetch_or(arg);
 }
-
 
 template <typename T>
 T* atomic_fetch_xor(atomic<T*>* obj, std::ptrdiff_t arg) {
-    return obj->fetch_xor(arg);
+  return obj->fetch_xor(arg);
 }
-
-
-
-    
-    
 }
 }  // argcv::concurrent
 

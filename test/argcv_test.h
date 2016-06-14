@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -37,6 +38,5 @@ typedef int (*testcase_t)(int, char* []);
 #define TEST_CASE_EXPECT_LE(a, b) assert(a <= b)
 #define TEST_CASE_EXPECT_GT(a, b) assert(a > b)
 #define TEST_CASE_EXPECT_GE(a, b) assert(a >= b)
-
 
 #endif  // ARGCV_TEST_ARGCV_TEST_HH

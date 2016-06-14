@@ -10,7 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in
+ *all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -47,25 +48,25 @@ namespace argcv {
 namespace ml {
 
 class logistic_regression : public ml<double, double> {
-public:
-    logistic_regression() {}
+ public:
+  logistic_regression() {}
 
-    logistic_regression(dataset<double, double> data) : data(data) {}
+  logistic_regression(dataset<double, double> data) : data(data) {}
 
-    ~logistic_regression() {}
+  ~logistic_regression() {}
 
-    void add(std::vector<double> x, double y) { data.add(x, y); }
+  void add(std::vector<double> x, double y) { data.add(x, y); }
 
-    bool learn() { return false; }
+  bool learn() { return false; }
 
-    bool save(const std::string &path) { return false; }
+  bool save(const std::string &path) { return false; }
 
-    bool load(const std::string &path) { return false; }
+  bool load(const std::string &path) { return false; }
 
-    double predict(std::vector<double> x) { return 0.0; }
+  double predict(std::vector<double> x) { return 0.0; }
 
-private:
-    dataset<double, double> data;
+ private:
+  dataset<double, double> data;
 };
 }
 }  // namespace argcv::ml
