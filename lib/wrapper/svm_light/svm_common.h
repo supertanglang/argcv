@@ -35,9 +35,10 @@
 /* us some memory, but you can use double, too */
 #define FNUM long  /* the type used for storing feature ids */
 #define FVAL float /* the type used for storing feature values */
-#define MAXFEATNUM                                 \
-  99999999 /* maximum feature number (must be in \ \
-              valid range of FNUM type and long int!) */
+
+#define MAXFEATNUM \
+  99999999  // maximum feature number (must be in valid range of FNUM type and
+            // long int!)
 
 #define LINEAR 0  /* linear kernel type */
 #define POLY 1    /* polynoial kernel type */
