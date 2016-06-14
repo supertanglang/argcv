@@ -1,0 +1,5 @@
+#!/bin/sh
+find .  -name '*.cc' -o -name '*.c' -o -name '*.h' -o -name '*.hh' | \
+    xargs -n 1 -I{} -P 6 sh -c 'echo "reformat: {}" && clang-format -i  -style="Google" {}'
+
+
